@@ -11,14 +11,14 @@ can be performed only by running a script, without any additional effort.
 
 ## Installation of Packstack with Ironic:
 
-    $ yum install -y git
+    $ sudo yum install -y git
     $ git clone git://github.com/jodlajodla/packstack.git
     $ cd packstack && git checkout stable/newton
     $ sudo bash run_setup.sh ironic
 
 ## Installation of Packstack with default components:
 
-    $ yum install -y git
+    $ sudo yum install -y git
     $ git clone git://github.com/jodlajodla/packstack.git
     $ cd packstack && git checkout stable/newton
     $ sudo bash run_setup.sh
