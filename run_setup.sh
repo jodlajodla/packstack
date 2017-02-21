@@ -41,7 +41,7 @@ $SUDO yum update -y
 $SUDO yum install -y openstack-packstack
 
 # Check which type of installation was chosen and do workaround with Puppetfile in case of Ironic
-if [ INCLUDE_IRONIC -eq 1 ]; then
+if [ $INCLUDE_IRONIC -eq 1 ]; then
 	change_puppetfile
 fi
 
@@ -53,7 +53,7 @@ $SUDO "$GEM_HOME/bin/r10k" puppet install -v
 $SUDO cp -r packstack/puppet/modules/packstack /usr/share/openstack-puppet/modules
 
 # Check which type of installation was chosen and do workaround with Puppetfile in case of Ironic
-if [ INCLUDE_IRONIC -eq 1 ]; then
+if [ $INCLUDE_IRONIC -eq 1 ]; then
 	packstack --os-ironic-install=y --nagios-install=n --allinone
 	change_puppetfile 1
 else
