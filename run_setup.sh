@@ -12,7 +12,10 @@
 if [ $(id -u) != 0 ]; then
 	SUDO='sudo -E'
 fi
+DEFAULT_EXTNET='physnet1'
 INCLUDE_IRONIC=$([[ "$1" == 'ironic' ]]; echo $?)
+BRIDGE_INTERFACE="$2"
+EXTERNAL_NETWORK="$([[ -z "$3" ]] && echo $DEFAULT_EXTNET || echo $3)"
 
 # Script functions
 function change_puppetfile {
@@ -54,10 +57,16 @@ $SUDO cp -r packstack/puppet/modules/packstack /usr/share/openstack-puppet/modul
 
 # Check which type of installation was chosen and do workaround with Puppetfile in case of Ironic
 if [ $INCLUDE_IRONIC -eq 0 ]; then
-	packstack --os-ironic-install=y --nagios-install=n --allinone
+	if [ ! -z "$BRIDGE_INTERFACE" ]; then
+		# Install Packstack & Ironic with bridged interface
+		packstack --os-ironic-install=y --nagios-install=n --provision-demo=n --os-neutron-ovs-bridge-mappings="$EXTERNAL_NETWORK":br-ex --os-neutron-ovs-bridge-interfaces=br-ex:"$BRIDGE_INTERFACE" --allinone
+	else
+		# Install only Packstack & Ironic with existing network configuration
+		packstack --os-ironic-install=y --nagios-install=n --provision-demo=n --allinone
+	fi
 	change_puppetfile 1
 else
-	packstack --nagios-install=n --allinone
+	packstack --nagios-install=n --provision-demo=n --allinone
 fi
 
 exit 0

@@ -9,12 +9,26 @@ release.
 This repository also contains installation script `run_setup.sh`, so the installation
 can be performed only by running a script, without any additional effort.
 
-## Installation of Packstack with Ironic:
+## Installation of Packstack with Ironic and existing network configuration:
 
     $ sudo yum install -y git
     $ git clone git://github.com/jodlajodla/packstack.git
     $ cd packstack && git checkout stable/newton
     $ sudo bash run_setup.sh ironic
+
+## Installation of Packstack with Ironic and bridged network:
+
+    $ sudo yum install -y git
+    $ git clone git://github.com/jodlajodla/packstack.git
+    $ cd packstack && git checkout stable/newton
+    $ sudo bash run_setup.sh ironic enp2s0
+
+## Installation of Packstack with Ironic and bridged network + named external network:
+
+    $ sudo yum install -y git
+    $ git clone git://github.com/jodlajodla/packstack.git
+    $ cd packstack && git checkout stable/newton
+    $ sudo bash run_setup.sh ironic enp2s0 extnet
 
 ## Installation of Packstack with default components:
 
