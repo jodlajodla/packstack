@@ -18,12 +18,16 @@ can be performed only by running a script, without any additional effort.
 
 ## Installation of Packstack with Ironic and bridged network:
 
+Make sure to replace `enp2s0` interface with your own.
+
     $ sudo yum install -y git
     $ git clone git://github.com/jodlajodla/packstack.git
     $ cd packstack && git checkout stable/newton
     $ sudo bash run_setup.sh ironic enp2s0
 
 ## Installation of Packstack with Ironic and bridged network + named external network:
+
+Make sure to replace `enp2s0` interface and `extnet` external network with your own.
 
     $ sudo yum install -y git
     $ git clone git://github.com/jodlajodla/packstack.git
