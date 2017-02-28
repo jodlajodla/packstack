@@ -59,14 +59,14 @@ $SUDO cp -r packstack/puppet/modules/packstack /usr/share/openstack-puppet/modul
 if [ $INCLUDE_IRONIC -eq 0 ]; then
 	if [ ! -z "$BRIDGE_INTERFACE" ]; then
 		# Install Packstack & Ironic with bridged interface
-		packstack --os-ironic-install=y --nagios-install=n --provision-demo=n --os-neutron-ovs-bridge-mappings="$EXTERNAL_NETWORK":br-ex --os-neutron-ovs-bridge-interfaces=br-ex:"$BRIDGE_INTERFACE" --allinone
+		$SUDO packstack --os-ironic-install=y --nagios-install=n --provision-demo=n --os-neutron-ovs-bridge-mappings="$EXTERNAL_NETWORK":br-ex --os-neutron-ovs-bridge-interfaces=br-ex:"$BRIDGE_INTERFACE" --allinone
 	else
 		# Install only Packstack & Ironic with existing network configuration
-		packstack --os-ironic-install=y --nagios-install=n --provision-demo=n --allinone
+		$SUDO packstack --os-ironic-install=y --nagios-install=n --provision-demo=n --allinone
 	fi
 	change_puppetfile 1
 else
-	packstack --nagios-install=n --provision-demo=n --allinone
+	$SUDO packstack --nagios-install=n --provision-demo=n --allinone
 fi
 
 exit 0
