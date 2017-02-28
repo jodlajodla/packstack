@@ -1,11 +1,13 @@
 # Packstack
 
 Fork of official Packstack repo which contains fix for installing Packstack
-with Ironic on CentOS 7 with OpenStack Ocata release. This repository, along
-original files, also contains installation script `run_setup.sh`, so the
-installation can be performed only by running a script, without any
-additional effort. There is also `Puppetfile.ironic` in repo which is used
-for correct installation of Packstack with Ironic.
+with Ironic on CentOS 7 with OpenStack Ocata release. There is only one
+changed file `packstack/puppet/modules/packstack/manifests/nova/sched/ironic.pp`
+which contains fix for correct value of `scheduler_host_manager` for Newton
+release.
+
+This repository also contains installation script `run_setup.sh`, so the installation
+can be performed only by running a script, without any additional effort.
 
 ## Installation of Packstack with Ironic and existing network configuration:
 
